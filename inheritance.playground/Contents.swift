@@ -89,7 +89,7 @@ struct Rect {
     }
 }
 
-// 类类型构造器代理
+// 类类型构造器代理分为横向代理和向上代理，横向代理只能发生在同一类内部，这种构造器称为便利构造器。向上代理发生在继承的情况下，在子类构造过程中，要先调用父类构造器初始化父类的存储属性，这种构造器成为指定构造器
 //“A simple way to remember this is:
 //
 //Designated initializers must always delegate up.
@@ -116,6 +116,66 @@ class RecipeIngredient: Food {
         self.init(name: name, quantity: 1)
     }
 }
+
+// 构造器调用规则：1，指定构造器必须调用其直接父类的指定构造器；2，便利构造器必须调用同一类中定义的其他构造器；3，便利构造器必须最终以调用一个指定构造器结束
+// 构造器继承 swift中的子类构造器的来源有两种: 自己编写和从父类继承。并不是所有构造器都能自动继承下来，能够从父类继承下来的构造器是有条件的，1，如果子类没有定义任何指定构造器，它将自动继承所有父类的指定构造器，2，如果子类提供了所有父类指定构造器的实现，无论是从条件1继承过来的，还是通过自己编写实现的，它都将自动继承所有父类的便利构造器
+
+// 重写
+// swift中的重写包括属性重写，方法重写和下标重写，不论是那一类重写都需要在原来的定义前加上override
+// 属性重写: 一方面可以重写getter 和setter 访问器，另一方面可以重写属性观察者
+class Person1{
+    var name : String
+    var age: Int
+    
+    func description() -> String{
+        return "\(name) 年龄是： \(age)"
+    }
+    
+    init(name: String, age : Int){
+        self.name = name
+        self.age = age
+    }
+}
+
+class Student1: Person1 {
+    var school : String
+    
+    // 从属性重写可见，子类本身并不存储数据，数据是存在父类的存储属性中的
+    override var age : Int{
+        get{
+            return super.age
+        }
+        
+        set{
+            super.age = newValue < 8 ? 8 : newValue
+        }
+        //属性观察者不能和getter setter 访问器同时重写，另外常量属性和计算属性都不能重写观察者
+//        willSet{
+//            print("年龄新值： \(newValue)")
+//        }
+    }
+    
+    convenience init(){
+        self.init(name : "Tony", age: 18, school : "清华大学")
+    }
+    
+    init(name : String, age: Int, school: String){
+        self.school = school
+        super.init(name: name, age: age)
+    }
+}
+
+// 方法重写： 我们可以在子类中重写从父类继承来的实例方法和静态方法（在静态方法中不能访问实例属性）
+// 下标重写， 也是重写下标的getter 和 setter 访问器
+
+// 类型检查与转换
+// is 和 as
+// is 可以判断一个实例是否是某个类的类型， 如果是目标类型则返回true， 否则返回FALSE
+// as? 操作符将元素转换为某个类型，如果转换成功，则把元素赋值给类变量，如果失败，则把nil赋值给变量
+// Any 和 AnyObject
+// AnyObject 可以表示任何类的实例 
+// Any 可以表示任何类型，包括基本数据类型
+
 
 // 失败初始化器
 struct Animal {
@@ -171,5 +231,4 @@ if unknownUnit == nil {
     print("This is not a defined temperature unit, so initialization failed.")
 }
 // prints "This is not a defined temperature unit, so initialization failed.”
-
 
