@@ -1,18 +1,29 @@
 //
-//  PlayerTableViewController.swift
+//  GamePickerTableViewController.swift
 //  Ratings
 //
-//  Created by lynn on 16/1/12.
+//  Created by lynn on 16/1/13.
 //  Copyright © 2016年 lynn. All rights reserved.
 //
 
 import UIKit
 
-class PlayerTableViewController: UITableViewController {
+class GamePickerTableViewController: UITableViewController {
 
-    var players: [Player] = playersData
+    var games:[String] = [
+        "Angry Birds",
+        "Chess",
+        "Russian Roulette",
+        "Spin the Bottle",
+        "Texas Hold'em Poker",
+        "Tic-Tac-Toe"]
+    var selectedGame: String? = "Chess"{
+        didSet{
+            selectedGameIndex = games.indexOf(selectedGame!)
+        }
+    }
     
-    var clickGame: Player!
+    var selectedGameIndex: Int?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,78 +48,48 @@ class PlayerTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return players.count
+//        if section == 0{
+            return games.count
+//        }
     }
 
- 
+  
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("GameCell", forIndexPath: indexPath)
+        cell.textLabel?.text = games[indexPath.row]
         
-        // identifier 要和storyboard 上的挂钩
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlayerCell", forIndexPath: indexPath) as! PlayerCell
-
-        // 设置textLabel和detailTextLabel的文本
-        let player = players[indexPath.row] as Player
-//        cell.textLabel?.text = player.name
-//        cell.detailTextLabel?.text = player.game
-        cell.player = player
+        if indexPath.row == selectedGameIndex{
+            cell.accessoryType = .Checkmark
+        }else{
+            cell.accessoryType = .None
+        }
         return cell
     }
-    
-     func  selectRowAtIndexPath(indexPath: NSIndexPath?, animated: Bool, scrollPosition: UITableViewScrollPosition){
-        
-        NSLog("index.row,index.section = %d,%d", (indexPath?.row)!,(indexPath?.section)!);
-        
-        
-    }
-    
-    func imageForRating(rating:Int) -> UIImage? {
-        let imageName = "\(rating)Stars"
-        return UIImage(named: imageName)
-    }
-    
-    @IBAction func cancelToPlayTableViewController(segue: UIStoryboardSegue){
-        
-    }
 
-    @IBAction func savePlayer(segue: UIStoryboardSegue){
-        if let playerDetailsViewController = segue.sourceViewController as? AddPlayerTableViewController{
-            
-            //add the new player to the players array
-            if let player = playerDetailsViewController.player {
-                players.append(player)
-                
-                //update the tableView
-                let indexPath = NSIndexPath(forRow: players.count-1, inSection: 0)
-                tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if let index = selectedGameIndex{
+            let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0))
+            cell?.accessoryType = .None
         }
+        
+        selectedGame = games[indexPath.row]
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.accessoryType = .Checkmark
     }
-    
-    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "ShowDetail"{
-            if let addPlayerController = segue.destinationViewController as? AddPlayerTableViewController{
-                if let selectedPlayCell = sender as? PlayerCell{
-                    
-                    let indexPath = tableView.indexPathForCell(selectedPlayCell)!
-                    
-                    NSLog("indexPath.row, indexPath.section: %d%d", indexPath.row, indexPath.section)
-                    let selectPlayer = players[indexPath.row]
-                    clickGame = selectPlayer
-                    addPlayerController.player = selectPlayer
-                }
-               
+        if segue.identifier == "SaveSelectedGame"{
+            let selectedCell = sender as? UITableViewCell
+            let indexPath = tableView.indexPathForCell(selectedCell!)
+            if let index = indexPath?.row{
+                selectedGame = games[index]
+                
             }
-        
-        }else if segue.identifier == "AddPlayer"{
-        
-            
         }
-        
     }
-    
- 
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
