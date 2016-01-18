@@ -12,6 +12,10 @@
 		BA1799EC1C48C8A500700941 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA1799EA1C48C8A500700941 /* Main.storyboard */; };
 		BA1799EE1C48C8A500700941 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA1799ED1C48C8A500700941 /* Assets.xcassets */; };
 		BA1799F11C48C8A500700941 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA1799EF1C48C8A500700941 /* LaunchScreen.storyboard */; };
+		BA1799F91C4A189D00700941 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA1799F81C4A189D00700941 /* MapKit.framework */; };
+		BA1799FB1C4A1FE400700941 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1799FA1C4A1FE400700941 /* MapViewController.swift */; };
+		BAD2643A1C4B960C00B33C8E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD264391C4B960C00B33C8E /* WebViewController.swift */; };
+		BAD264401C4C7CFB00B33C8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BAD264421C4C7CFB00B33C8E /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,14 @@
 		BA1799ED1C48C8A500700941 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA1799F01C48C8A500700941 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA1799F21C48C8A500700941 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA1799F81C4A189D00700941 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		BA1799FA1C4A1FE400700941 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		BAD264391C4B960C00B33C8E /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		BAD2643C1C4BB66400B33C8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		BAD2643D1C4BB77200B33C8E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		BAD264411C4C7CFB00B33C8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BAD264431C4C7D0500B33C8E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BAD264441C4C7D0600B33C8E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA1799F91C4A189D00700941 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +51,7 @@
 		BA1799DA1C48C8A500700941 = {
 			isa = PBXGroup;
 			children = (
+				BA1799F81C4A189D00700941 /* MapKit.framework */,
 				BA1799E51C48C8A500700941 /* WorldTrotter */,
 				BA1799E41C48C8A500700941 /* Products */,
 			);
@@ -54,12 +68,15 @@
 		BA1799E51C48C8A500700941 /* WorldTrotter */ = {
 			isa = PBXGroup;
 			children = (
+				BAD264421C4C7CFB00B33C8E /* Localizable.strings */,
 				BA1799E61C48C8A500700941 /* AppDelegate.swift */,
 				BA1799E81C48C8A500700941 /* ViewController.swift */,
 				BA1799EA1C48C8A500700941 /* Main.storyboard */,
 				BA1799ED1C48C8A500700941 /* Assets.xcassets */,
 				BA1799EF1C48C8A500700941 /* LaunchScreen.storyboard */,
 				BA1799F21C48C8A500700941 /* Info.plist */,
+				BA1799FA1C4A1FE400700941 /* MapViewController.swift */,
+				BAD264391C4B960C00B33C8E /* WebViewController.swift */,
 			);
 			path = WorldTrotter;
 			sourceTree = "<group>";
@@ -106,6 +123,7 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
 			);
 			mainGroup = BA1799DA1C48C8A500700941;
 			productRefGroup = BA1799E41C48C8A500700941 /* Products */;
@@ -123,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA1799F11C48C8A500700941 /* LaunchScreen.storyboard in Resources */,
+				BAD264401C4C7CFB00B33C8E /* Localizable.strings in Resources */,
 				BA1799EE1C48C8A500700941 /* Assets.xcassets in Resources */,
 				BA1799EC1C48C8A500700941 /* Main.storyboard in Resources */,
 			);
@@ -136,7 +155,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA1799E91C48C8A500700941 /* ViewController.swift in Sources */,
+				BA1799FB1C4A1FE400700941 /* MapViewController.swift in Sources */,
 				BA1799E71C48C8A500700941 /* AppDelegate.swift in Sources */,
+				BAD2643A1C4B960C00B33C8E /* WebViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +168,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				BA1799EB1C48C8A500700941 /* Base */,
+				BAD2643C1C4BB66400B33C8E /* en */,
+				BAD2643D1C4BB77200B33C8E /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -157,6 +180,16 @@
 				BA1799F01C48C8A500700941 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BAD264421C4C7CFB00B33C8E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BAD264411C4C7CFB00B33C8E /* Base */,
+				BAD264431C4C7D0500B33C8E /* en */,
+				BAD264441C4C7D0600B33C8E /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -284,6 +317,7 @@
 				BA1799F71C48C8A500700941 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -35,6 +35,23 @@ class ConvertionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
+        
+        let date = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "a HH:mm"
+        let dateString = dateFormatter.stringFromDate(date)
+        let timeIdentifier = dateString.rangeOfString("PM")
+        
+        if timeIdentifier != nil{
+            view.backgroundColor = UIColor.blackColor()
+        }else{
+            view.backgroundColor = UIColor.whiteColor()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,9 +60,11 @@ class ConvertionViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func fahrenheitTextEditingChange(textfield: UITextField){
-        if let text = textfield.text, value = Double(text){
+//        if let text = textfield.text, value = Double(text){
+        if let text = textfield.text, number = numberFormatter.numberFromString(text){
 //            celsiusLabel.text = text
-            fahrenheitValue = value
+//            fahrenheitValue = value
+            fahrenheitValue = number.doubleValue
         }else{
             celsiusLabel.text = "???"
         }
@@ -69,11 +88,16 @@ class ConvertionViewController: UIViewController, UITextFieldDelegate {
             return true
         }
         
-        let currentTextHasDecimalSeperator = textField.text?.rangeOfString(".")
-        let replaceStringHasDS = string.rangeOfString(".")
         
+        let currentLocale = NSLocale.currentLocale()
+        let decimalSeperator = currentLocale.objectForKey(NSLocaleDecimalSeparator) as! String
         
-        let mycharset = NSCharacterSet(charactersInString: "-0123456789.")
+        let currentTextHasDecimalSeperator = textField.text?.rangeOfString(decimalSeperator)
+        let replaceStringHasDS = string.rangeOfString(decimalSeperator)
+       
+        let charset = "-0123456789" + decimalSeperator
+        
+        let mycharset = NSCharacterSet(charactersInString: charset)
         
         if currentTextHasDecimalSeperator != nil && replaceStringHasDS != nil{
             return false
